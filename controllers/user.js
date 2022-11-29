@@ -3,8 +3,7 @@
 var bcrypt = require('bcrypt-nodejs');
 var User = require('../models/user');
 var jwt = require('../services/jwt');
-var fs = require('fs');
-var path = require('path');
+
 
 function saveUser(req,res){
 	var user = new User();
@@ -16,7 +15,8 @@ function saveUser(req,res){
 	user.name = params.name;
 	user.surname = params.surname;
 	user.email = params.email;
-	user.role = 'ROLE_USER';	
+    user.saldo = params.saldo;
+	user.role = 'ROLE_USER';
 
 	if (params.password) {
 		bcrypt.hash(params.password,null,null,function(err,hash){
