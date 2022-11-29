@@ -5,8 +5,7 @@ var Schema = mongoose.Schema;
 
 var HistoricoSchema = Schema({
 	name:String,
-	rut: String,
-	telefono:String,
+	rut: String,	
     bancoDestino:String,
     tipoCuenta:{type:Schema.ObjectId, ref: 'TipoCuenta'},
 	monto:Number

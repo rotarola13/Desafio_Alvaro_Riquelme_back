@@ -6,6 +6,8 @@ var bodyParse = require('body-parser');
 var app = express();
 
 var user_routes = require('./routes/user')
+var destinatario_routes = require('./routes/destinatario')
+
 
 app.use(bodyParse.urlencoded({extended:false}));
 app.use(bodyParse.json());
@@ -20,5 +22,7 @@ app.use((req,res,next)=>{
 });
 
 app.use('/api',user_routes);
+app.use('/api',destinatario_routes);
+
 
 module.exports = app;
