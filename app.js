@@ -7,6 +7,8 @@ var app = express();
 
 var user_routes = require('./routes/user')
 var destinatario_routes = require('./routes/destinatario')
+var tipoCuenta_routes = require('./routes/tipoCuenta')
+
 
 
 app.use(bodyParse.urlencoded({extended:false}));
@@ -23,6 +25,8 @@ app.use((req,res,next)=>{
 
 app.use('/api',user_routes);
 app.use('/api',destinatario_routes);
+app.use('/api',tipoCuenta_routes);
+
 
 
 module.exports = app;

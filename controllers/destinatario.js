@@ -2,7 +2,7 @@
 
 var bcrypt = require('bcrypt-nodejs');
 var Destinatario = require('../models/destinatario');
-var TipoCuenta = require('../models/tipo_cuenta');
+var TipoCuenta = require('../models/tipocuenta');
 var jwt = require('../services/jwt');
 
 
@@ -10,7 +10,7 @@ function saveDestinatario(req, res) {
     var destinatario = new Destinatario();
 
     var params = req.body;
-    
+    console.log(req.body);
     destinatario.name = params.name;
     destinatario.rut = params.rut;
     destinatario.email = params.email;
@@ -32,7 +32,7 @@ function saveDestinatario(req, res) {
                 res.status(500).send({ message: 'Error en Guardado' });
 
             } else {
-                if (!userStored) {
+                if (!destinatarioStored) {
                     res.status(404).send({ message: 'No se ha registrado el destinatario' });
 
                 } else {
