@@ -27,7 +27,7 @@ function saveDestinatario(req, res) {
         && destinatario.bancoDestino != null
         && destinatario.tipoCuenta != null
         && destinatario.numeroCuenta != null) {
-            destinatario.save((err, destinatarioStored) => {
+        destinatario.save((err, destinatarioStored) => {
             if (err) {
                 res.status(500).send({ message: 'Error en Guardado' });
 
@@ -48,7 +48,26 @@ function saveDestinatario(req, res) {
 
 }
 
+function getdestinatarioFind(req, res) {
+    var mysort = { name: -1 };
+    var find= Destinatario.find({}).sort(mysort);
+	
+    find.populate({path:'tipoCuenta'}).exec((err,destinatario)=>{
+        if (err) {
+	        res.status(500).send({message:'Error en la peticion'});           
+        } else {
+            if (!destinatario) {
+	            res.status(404).send({message:'No hay destinatarios'});               
+            } else {
+	            res.status(200).send({destinatario});                
+            }
+        }
+    });   
+
+}
+
 
 module.exports = {
-    saveDestinatario
+    saveDestinatario,
+    getdestinatarioFind
 };
