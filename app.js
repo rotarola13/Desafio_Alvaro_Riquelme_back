@@ -8,6 +8,8 @@ var app = express();
 var user_routes = require('./routes/user')
 var destinatario_routes = require('./routes/destinatario')
 var tipoCuenta_routes = require('./routes/tipoCuenta')
+var transferencia = require('./routes/transferencia')
+
 
 
 
@@ -26,7 +28,6 @@ app.use((req,res,next)=>{
 app.use('/api',user_routes);
 app.use('/api',destinatario_routes);
 app.use('/api',tipoCuenta_routes);
-
-
+app.use('/api',transferencia);
 
 module.exports = app;

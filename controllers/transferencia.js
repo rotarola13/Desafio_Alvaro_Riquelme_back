@@ -5,7 +5,7 @@ var Historico = require('../models/historico');
 var User = require('../models/user');
 
 function saveTransferencia(req,res) {
-    var userId= req.params.id;
+    var userId= req.body._id;
     var update = req.body;
 
     User.findByIdAndUpdate(userId,update,(err,userUpdate)=>{
@@ -13,7 +13,7 @@ function saveTransferencia(req,res) {
 	        res.status(500).send({message:'Error en realizar transferencia'});
             
         } else {
-            if (!songUpdate) {
+            if (!userUpdate) {
 	            res.status(404).send({message:'La transferencia no ha podido completarse'});
                 
             } else {
@@ -28,13 +28,14 @@ function saveHistoricoTransferencia(req, res) {
 
     var params = req.body;
 
-    console.log(params);
+    let now= new Date();
 
     historico.name = params.name;
     historico.rut = params.rut;
     historico.bancoDestino = params.bancoDestino;
     historico.tipoCuenta = params.tipoCuenta;
     historico.monto = params.monto;
+    historico.fechaTransferencia = now;
 
     if (historico.name != null
         && historico.rut != null

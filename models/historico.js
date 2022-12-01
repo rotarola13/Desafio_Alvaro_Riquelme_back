@@ -8,7 +8,8 @@ var HistoricoSchema = Schema({
 	rut: String,	
     bancoDestino:String,
     tipoCuenta:{type:Schema.ObjectId, ref: 'TipoCuenta'},
-	monto:String
+	monto:String,
+	fechaTransferencia:Date
 });
 
 module.exports = mongoose.model('Historico',HistoricoSchema);
