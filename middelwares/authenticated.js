@@ -12,7 +12,7 @@ exports.ensureAuth = function (req,res,next) {
 
     try {
         var payLoad = jwt.decode(token,secret);
-
+        console.log(payLoad);
         if (payLoad.exp <= moment().unix()) {
             return res.status(401).send({message:'Session ha expirado'})            
         }
