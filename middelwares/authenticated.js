@@ -9,16 +9,17 @@ exports.ensureAuth = function (req,res,next) {
     }
 
     var token = req.headers.authorization.replace(/['"]+/g,'');
-
+ 
     try {
+        
         var payLoad = jwt.decode(token,secret);
-        console.log(payLoad);
+      
         if (payLoad.exp <= moment().unix()) {
             return res.status(401).send({message:'Session ha expirado'})            
         }
         
     } catch (error) {       
-        return res.status(404).send({message:'Token no valido'})
+        return res.status(401).send({message:'Session ha expirado'})     
     }
     req.user = payLoad;
 
