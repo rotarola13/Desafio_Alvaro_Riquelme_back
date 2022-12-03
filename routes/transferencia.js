@@ -9,6 +9,4 @@ api.post('/historico',md_auth.ensureAuth,TransferenciaController.saveHistoricoTr
 api.post('/transferencia',md_auth.ensureAuth,TransferenciaController.saveTransferencia);
 api.get('/historicoFind/:id',md_auth.ensureAuth,TransferenciaController.historicoFind);
 
-
-
 module.exports = api;
