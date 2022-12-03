@@ -10,11 +10,11 @@ function saveTransferencia(req, res) {
 
     User.findByIdAndUpdate(userId, update, (err, userUpdate) => {
         if (err) {
-            res.status(500).send({ message: 'Error en realizar transferencia' });
+            res.status(500).send({ message: 'Transfer error' });
 
         } else {
             if (!userUpdate) {
-                res.status(404).send({ message: 'La transferencia no ha podido completarse' });
+                res.status(404).send({ message: 'Transfer could not be completed' });
 
             } else {
                 return res.status(200).send({ user: userUpdate });
@@ -44,11 +44,11 @@ function saveHistoricoTransferencia(req, res) {
         && historico.monto != null) {
         historico.save((err, historicoStored) => {
             if (err) {
-                res.status(500).send({ message: 'Error en Guardado' });
+                res.status(500).send({ message: 'Saving error' });
 
             } else {
                 if (!historicoStored) {
-                    res.status(404).send({ message: 'No se ha registrado el historico' });
+                    res.status(404).send({ message: 'The history has not been registered' });
 
                 } else {
                     res.status(200).send({ historico: historicoStored });
@@ -57,7 +57,7 @@ function saveHistoricoTransferencia(req, res) {
             }
         })
     } else {
-        res.status(200).send({ message: 'Introduce todos los campos' });
+        res.status(200).send({ message: 'Enter all the fields' });
 
     }
 
@@ -70,10 +70,10 @@ function historicoFind(req, res) {
 
     find.populate({ path: 'tipoCuenta' }).exec((err, historico) => {
         if (err) {
-            res.status(500).send({ message: 'Error en la peticion' });
+            res.status(500).send({ message: 'Error obtaining history' });
         } else {
             if (!historico) {
-                res.status(404).send({ message: 'No hay historico' });
+                res.status(404).send({ message: 'There is no history' });
             } else {
                 res.status(200).send({ historico });
             }

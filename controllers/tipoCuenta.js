@@ -9,10 +9,10 @@ function getTipoCuenta(req,res) {
 	
 	TipoCuenta.find({},(err,tipoCuenta)=>{
 		if (err) {
-			res.status(500).send({message:'Error en la peticion'})
+			res.status(500).send({message:'Error obtaining account type'})
 		} else {
 			if (!tipoCuenta) {
-				res.status(404).send({message:'No existe el usuario'})
+				res.status(404).send({message:'There are no account types'})
 				
 			} else {
 				res.status(200).send({tipoCuenta})

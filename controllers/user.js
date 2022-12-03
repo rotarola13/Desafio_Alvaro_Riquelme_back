@@ -57,10 +57,10 @@ function loginUser(req,res) {
 
 	User.findOne({email:email.toLowerCase()},(err,user)=>{
 		if (err) {
-			res.status(500).send({message:'Error en la peticion'})
+			res.status(500).send({message:'Error obtaining user'})
 		} else {
 			if (!user) {
-				res.status(404).send({message:'No existe el usuario'})
+				res.status(404).send({message:'The user does not exist'})
 				
 			} else {
 				bcrypt.compare(password, user.password, function(err,check){
@@ -76,8 +76,7 @@ function loginUser(req,res) {
 							res.status(200).send({user})
 						}
 					} else {
-						res.status(404).send({message:'Fallo logeo user'})
-						
+						res.status(404);						
 					}
 				});
 			}

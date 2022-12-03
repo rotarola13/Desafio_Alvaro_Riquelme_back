@@ -29,11 +29,11 @@ function saveDestinatario(req, res) {
         && destinatario.numeroCuenta != null) {
         destinatario.save((err, destinatarioStored) => {
             if (err) {
-                res.status(500).send({ message: 'Error en Guardado' });
+                res.status(500).send({ message: 'Saving error' });
 
             } else {
                 if (!destinatarioStored) {
-                    res.status(404).send({ message: 'No se ha registrado el destinatario' });
+                    res.status(404).send({ message: 'Recipient not registered' });
 
                 } else {
                     res.status(200).send({ destinatario: destinatarioStored });
@@ -42,7 +42,7 @@ function saveDestinatario(req, res) {
             }
         })
     } else {
-        res.status(200).send({ message: 'Introduce todos los campos' });
+        res.status(200).send({ message: 'Enter all the fields' });
 
     }
 
@@ -54,10 +54,10 @@ function getdestinatarioFind(req, res) {
 	
     find.populate({path:'tipoCuenta'}).exec((err,destinatario)=>{
         if (err) {
-	        res.status(500).send({message:'Error en la peticion'});           
+	        res.status(500).send({message:'Error obtaining recipient'});           
         } else {
             if (!destinatario) {
-	            res.status(404).send({message:'No hay destinatarios'});               
+	            res.status(404).send({message:'There are no recipients'});               
             } else {
 	            res.status(200).send({destinatario});                
             }
