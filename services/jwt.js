@@ -1,7 +1,9 @@
 'use strict'
 var jwt= require('jwt-simple');
 var moment = require('moment');
-var secret='clave_check'
+const dotenv = require("dotenv");
+dotenv.config({ path: "./config.env" });
+var secret=process.env.passJwt;
 
 exports.createToken = function (user) {
   var payLoad ={

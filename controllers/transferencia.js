@@ -65,7 +65,7 @@ function saveHistoricoTransferencia(req, res) {
 }
 
 function historicoFind(req, res) {
-    var mysort = { fechaTransferencia: 1 };
+    var mysort = { fechaTransferencia: -1 };
     var find = Historico.find({}).sort(mysort);
 
     find.populate({ path: 'tipoCuenta' }).exec((err, historico) => {

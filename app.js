@@ -2,6 +2,7 @@
 
 var express = require('express');
 var bodyParse = require('body-parser');
+var morgan = require('morgan');
 
 var app = express();
 
@@ -10,11 +11,15 @@ var destinatario_routes = require('./routes/destinatario')
 var tipoCuenta_routes = require('./routes/tipoCuenta')
 var transferencia = require('./routes/transferencia')
 
+morgan.token('id', function getId (req) {
+	return req.id
+  })
 
 
 
 app.use(bodyParse.urlencoded({extended:false}));
 app.use(bodyParse.json());
+app.use(morgan(':id :method :url :response-time'))
 
 app.use((req,res,next)=>{
 	res.header('Access-Control-Allow-Origin','*');

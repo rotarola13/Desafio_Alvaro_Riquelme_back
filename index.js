@@ -1,19 +1,21 @@
 'use strict'
 
+const dotenv = require("dotenv");
+dotenv.config({ path: "./config.env" });
 var mongoose = require('mongoose');
 var app = require('./app')
-var port= process.env.PORT || 3977;
+var port = process.env.PORT || 3977;
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb+srv://ariquelo:qpOJQeehytPgR8UA@bdcheck.syutrhj.mongodb.net/bdcheck?retryWrites=true&w=majority',(err,res)=>{
+mongoose.connect(process.env.mongoConnect, (err, res) => {
 	if (err) {
-        throw err;
-	}else
-	{
+		throw err;
+	}
+	else {
 		console.log('correcto');
-		app.listen(port, function(){
-			console.log('Servidor del api rest de musica escuchando en MongoBD'+port)
+		app.listen(port, function () {
+			console.log('Servidor del api rest en: PORT ' + port)
 		});
 	}
 })
