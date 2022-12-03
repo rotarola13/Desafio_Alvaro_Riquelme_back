@@ -3,6 +3,7 @@
 var express = require('express');
 var bodyParse = require('body-parser');
 var morgan = require('morgan');
+const errorHandler = require('./middelwares/error');
 
 var app = express();
 
@@ -16,7 +17,7 @@ morgan.token('id', function getId (req) {
   })
 
 
-
+app.use(errorHandler);
 app.use(bodyParse.urlencoded({extended:false}));
 app.use(bodyParse.json());
 app.use(morgan(':id :method :url :response-time'))
