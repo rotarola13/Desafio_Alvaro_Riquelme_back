@@ -68,7 +68,7 @@ function saveHistoricoTransferencia(req, res) {
 }
 
 function historicoFind(req, res) {
-    var idUser = req.body._id;
+    var idUser = req.params.id;
     var mysort = { fechaTransferencia: -1 };
     var find = Historico.find({user:idUser}).sort(mysort);
 

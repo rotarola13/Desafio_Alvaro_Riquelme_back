@@ -7,7 +7,7 @@ var api = express.Router();
 
 api.post('/historico',md_auth.ensureAuth,TransferenciaController.saveHistoricoTransferencia);
 api.post('/transferencia',md_auth.ensureAuth,TransferenciaController.saveTransferencia);
-api.get('/historicoFind',md_auth.ensureAuth,TransferenciaController.historicoFind);
+api.get('/historicoFind/:id',md_auth.ensureAuth,TransferenciaController.historicoFind);
 
 
 

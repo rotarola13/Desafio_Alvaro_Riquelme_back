@@ -51,7 +51,7 @@ function saveDestinatario(req, res) {
 }
 
 function getdestinatarioFind(req, res) {
-    var idUser = req.body._id;
+    var idUser = req.params.id;
     var mysort = { name: -1 };
     var find= Destinatario.find({user:idUser}).sort(mysort);
 	
