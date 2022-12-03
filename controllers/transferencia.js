@@ -37,6 +37,7 @@ function saveHistoricoTransferencia(req, res) {
     historico.monto = params.monto;
     historico.fechaTransferencia = now;
     historico.user = params.user;
+    historico.codeStatus = true;
 
 
     if (historico.name != null
@@ -70,7 +71,7 @@ function saveHistoricoTransferencia(req, res) {
 function historicoFind(req, res) {
     var idUser = req.params.id;
     var mysort = { fechaTransferencia: -1 };
-    var find = Historico.find({user:idUser}).sort(mysort);
+    var find = Historico.find({user:idUser,codeStatus:true}).sort(mysort);
 
     find.populate({ path: 'tipoCuenta'}).exec((err, historico) => {
         if (err) {

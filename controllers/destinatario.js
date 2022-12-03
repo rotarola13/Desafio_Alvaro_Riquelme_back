@@ -19,7 +19,7 @@ function saveDestinatario(req, res) {
     destinatario.tipoCuenta = params.tipoCuenta;
     destinatario.numeroCuenta = params.numeroCuenta;
     destinatario.user = params.user;
-
+    destinatario.codeStatus = true;
 
     if (destinatario.name != null
         && destinatario.rut != null
@@ -53,7 +53,7 @@ function saveDestinatario(req, res) {
 function getdestinatarioFind(req, res) {
     var idUser = req.params.id;
     var mysort = { name: -1 };
-    var find= Destinatario.find({user:idUser}).sort(mysort);
+    var find= Destinatario.find({user:idUser,codeStatus:true}).sort(mysort);
 	
     find.populate({path:'tipoCuenta'}).exec((err,destinatario)=>{
         if (err) {
@@ -69,8 +69,28 @@ function getdestinatarioFind(req, res) {
 
 }
 
+function removeDestinatario(req, res) {
+    var destinatarioId = req.body._id;
+    var update = req.body;
+    update.codeStatus=false;
+
+    Destinatario.findByIdAndUpdate(destinatarioId, update, (err, destUpdate) => {
+        if (err) {
+            res.status(500).send({ message: 'Error when updating recipient' });
+        } else {
+            if (!destUpdate) {
+                res.status(404).send({ message: 'Recipient has not been updated' });
+
+            } else {
+                return res.status(200).send({ destinatario: destUpdate });
+            }
+        }
+    });
+}
+
 
 module.exports = {
     saveDestinatario,
-    getdestinatarioFind
+    getdestinatarioFind,
+    removeDestinatario
 };

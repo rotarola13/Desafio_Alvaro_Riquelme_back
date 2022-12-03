@@ -17,6 +17,7 @@ function saveUser(req,res){
 	user.email = params.email;
     user.saldo = params.saldo;
 	user.role = 'ROLE_USER';
+	user.codeStatus = true;
 
 	if (params.password) {
 		bcrypt.hash(params.password,null,null,function(err,hash){

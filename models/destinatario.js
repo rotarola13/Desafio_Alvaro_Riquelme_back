@@ -12,6 +12,7 @@ var DestSchema = Schema({
     tipoCuenta:{type:Schema.ObjectId, ref: 'TipoCuenta'},
 	numeroCuenta:String,
 	user:{type:Schema.ObjectId, ref: 'User'},
+	codeStatus:Boolean
 });
 
 module.exports = mongoose.model('Destinatario',DestSchema);

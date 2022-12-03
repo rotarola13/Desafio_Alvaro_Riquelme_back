@@ -11,6 +11,7 @@ var HistoricoSchema = Schema({
 	monto:String,
 	fechaTransferencia:Date,
 	user:{type:Schema.ObjectId, ref: 'User'},
+	codeStatus:Boolean
 });
 
 module.exports = mongoose.model('Historico',HistoricoSchema);

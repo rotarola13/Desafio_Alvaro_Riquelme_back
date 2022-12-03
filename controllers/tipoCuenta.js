@@ -7,7 +7,7 @@ var jwt = require('../services/jwt');
 
 function getTipoCuenta(req,res) {
 	
-	TipoCuenta.find({},(err,tipoCuenta)=>{
+	TipoCuenta.find({codeStatus:true},(err,tipoCuenta)=>{
 		if (err) {
 			res.status(500).send({message:'Error obtaining account type'})
 		} else {
