@@ -18,6 +18,7 @@ function saveDestinatario(req, res) {
     destinatario.bancoDestino = params.bancoDestino;
     destinatario.tipoCuenta = params.tipoCuenta;
     destinatario.numeroCuenta = params.numeroCuenta;
+    destinatario.user = params.user;
 
 
     if (destinatario.name != null
@@ -26,7 +27,8 @@ function saveDestinatario(req, res) {
         && destinatario.telefono != null
         && destinatario.bancoDestino != null
         && destinatario.tipoCuenta != null
-        && destinatario.numeroCuenta != null) {
+        && destinatario.numeroCuenta != null
+        && destinatario.user != null) {
         destinatario.save((err, destinatarioStored) => {
             if (err) {
                 res.status(500).send({ message: 'Saving error' });
@@ -49,8 +51,9 @@ function saveDestinatario(req, res) {
 }
 
 function getdestinatarioFind(req, res) {
+    var idUser = req.body._id;
     var mysort = { name: -1 };
-    var find= Destinatario.find({}).sort(mysort);
+    var find= Destinatario.find({user:idUser}).sort(mysort);
 	
     find.populate({path:'tipoCuenta'}).exec((err,destinatario)=>{
         if (err) {

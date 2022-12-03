@@ -10,7 +10,8 @@ var DestSchema = Schema({
 	telefono:String,
     bancoDestino:String,
     tipoCuenta:{type:Schema.ObjectId, ref: 'TipoCuenta'},
-	numeroCuenta:String
+	numeroCuenta:String,
+	user:{type:Schema.ObjectId, ref: 'User'},
 });
 
 module.exports = mongoose.model('Destinatario',DestSchema);

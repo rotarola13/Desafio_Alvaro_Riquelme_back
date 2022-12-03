@@ -36,12 +36,15 @@ function saveHistoricoTransferencia(req, res) {
     historico.tipoCuenta = params.tipoCuenta;
     historico.monto = params.monto;
     historico.fechaTransferencia = now;
+    historico.user = params.user;
+
 
     if (historico.name != null
         && historico.rut != null
         && historico.bancoDestino != null
         && historico.tipoCuenta != null
-        && historico.monto != null) {
+        && historico.monto != null
+        && historico.user != null) {
         historico.save((err, historicoStored) => {
             if (err) {
                 res.status(500).send({ message: 'Saving error' });
@@ -65,10 +68,11 @@ function saveHistoricoTransferencia(req, res) {
 }
 
 function historicoFind(req, res) {
+    var idUser = req.body._id;
     var mysort = { fechaTransferencia: -1 };
-    var find = Historico.find({}).sort(mysort);
+    var find = Historico.find({user:idUser}).sort(mysort);
 
-    find.populate({ path: 'tipoCuenta' }).exec((err, historico) => {
+    find.populate({ path: 'tipoCuenta'}).exec((err, historico) => {
         if (err) {
             res.status(500).send({ message: 'Error obtaining history' });
         } else {
