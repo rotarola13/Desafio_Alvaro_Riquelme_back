@@ -18,11 +18,11 @@ exports.ensureAuth = function (req,res,next) {
         var payLoad = jwt.decode(token,secret);
       
         if (payLoad.exp <= moment().unix()) {
-            return res.status(401)          
+            return res.status(401).send({error});        
         }
         
     } catch (error) {       
-        return res.status(401)     
+        return res.status(401).send({error});	     
     }
     req.user = payLoad;
 
