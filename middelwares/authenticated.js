@@ -18,7 +18,7 @@ exports.ensureAuth = function (req,res,next) {
         var payLoad = jwt.decode(token,secret);
       
         if (payLoad.exp <= moment().unix()) {
-            return res.status(401).send({error});        
+            return res.status(401).send({message:'Expired'});        
         }
         
     } catch (error) {       
